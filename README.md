@@ -1,129 +1,129 @@
-# 🚗 Self-Driving Cars Perception Suite 🏎️💨
+# 🚗 Otonom Sürüş Görsel Algılama Paketi (Self-Driving Cars Suite) 🏎️💨
 
 [![GitHub Stars](https://img.shields.io/badge/YOLO-v11-00FFFF.svg?style=for-the-badge&logo=yolo)](https://github.com/ultralytics/ultralytics)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-EE4C2C.svg?style=for-the-badge&logo=pytorch)](https://pytorch.org/)
-[![OpenCV](https://img.shields.io/badge/OpenCV-Computer%20Vision-5C3EE8.svg?style=for-the-badge&logo=opencv)](https://opencv.org/)
-[![Git LFS](https://img.shields.io/badge/Git%20LFS-Enabled-orange.svg?style=for-the-badge&logo=git-lfs)](https://git-lfs.github.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![OpenCV](https://img.shields.io/badge/OpenCV-Bilgisayarlı%20Görü-5C3EE8.svg?style=for-the-badge&logo=opencv)](https://opencv.org/)
+[![Git LFS](https://img.shields.io/badge/Git%20LFS-Aktif-orange.svg?style=for-the-badge&logo=git-lfs)](https://git-lfs.github.com/)
+[![License: MIT](https://img.shields.io/badge/Lisans-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
-An end-to-end, multi-modal autonomous vehicle visual perception system featuring **real-time object detection**, **classical & deep learning lane detection**, and **drivable area semantic road segmentation** powered by **YOLO11** and **OpenCV**.
+Otonom araçlar ve gelişmiş sürücü destek sistemleri (ADAS) için geliştirilmiş; **gerçek zamanlı nesne tespiti**, **geleneksel ve derin öğrenme tabanlı şerit tespiti** ile **sürülebilir alan yol segmentasyonunu** bir araya getiren kapsamlı bilgisayarlı görü ve derin öğrenme algılama paketi.
 
 ---
 
-## 🌟 Key Perception Capabilities
+## 🌟 Temel Algılama Yetenekleri
 
-| Module | Technique / Model | Primary Objective | Real-time FPS |
+| Modül | Kullanılan Yöntem / Model | Birincil Hedef | Gerçek Zamanlı Hız (FPS) |
 | :--- | :--- | :--- | :---: |
-| **1. Traffic Object Detection** | YOLO11 Large (`yolo11l.pt`) | Cars, Pedestrians, Bicycles, Trucks, Buses, Traffic Lights | ~45-60+ FPS |
-| **2. Classical Lane Detection** | OpenCV IPM + HSV + Sliding Windows | Fast geometric lane curvature & center offset tracking | ~80-120 FPS |
-| **3. Deep Learning Lane Segmentation** | YOLO11 Large Segment (`yolo11l-seg.pt`) | Robust pixel-level lane boundary mask under complex lighting | ~35-50 FPS |
-| **4. Drivable Area Segmentation** | YOLO11 Large Segment (`yolo11l-seg.pt`) | Full drivable road surface mask & navigable path prediction | ~35-50 FPS |
+| **1. Trafik Nesneleri & Yaya Tespiti** | YOLO11 Large (`yolo11l.pt`) | Araç, Yaya, Bisiklet, Kamyon, Otobüs, Trafik Işıkları | ~45-60+ FPS |
+| **2. Klasik Şerit Tespiti** | OpenCV IPM + HSV + Kayan Pencereler | Geometrik şerit eğriliği ve merkez kayması takibi | ~80-120 FPS |
+| **3. Derin Öğrenme Şerit Segmentasyonu** | YOLO11 Large Segment (`yolo11l-seg.pt`) | Zorlu ışık ve gölge altında piksel düzeyinde şerit maskesi | ~35-50 FPS |
+| **4. Sürülebilir Alan Segmentasyonu** | YOLO11 Large Segment (`yolo11l-seg.pt`) | Sürülebilir yol yüzeyi maskeleme ve güvenli sürüş rotası | ~35-50 FPS |
 
 ---
 
-## 📸 Inference Demonstrations & Results
+## 📸 Çıkarım (Inference) ve Model Sonuçları
 
-### 1️⃣ Vehicle & Pedestrian Multi-Class Detection
-High-accuracy real-time bounding box detection, classification, and moving average FPS profiling for on-road dynamic agents.
+### 1️⃣ Araç ve Yaya Çoklu Sınıf Tespiti
+Yoldaki dinamik aktörler için yüksek doğruluklu gerçek zamanlı sınırlayıcı kutu (bounding box) tespiti, sınıflandırma ve hareketli ortalama FPS gösterimi.
 
 <div align="center">
-  <img src="assets/car_person_detection_demo.jpg" alt="Car and Pedestrian Detection Demo" width="850"/>
-  <p><i>Figure 1: Real-time multi-agent vehicle & pedestrian detection with confidence scoring and live FPS overlay.</i></p>
+  <img src="assets/car_person_detection_demo.jpg" alt="Araç ve Yaya Tespiti Demosu" width="850"/>
+  <p><i>Şekil 1: Güven skoru, sınıflandırma ve anlık FPS göstergeli araç ve yaya tespiti.</i></p>
 </div>
 
 ---
 
-### 2️⃣ Classical Lane Detection (OpenCV & IPM Pipeline)
-Uses **Inverse Perspective Mapping (IPM)** for Bird's-Eye View perspective transformation, HSV dynamic color filtering, and iterative sliding window histogram peak detection.
+### 2️⃣ Klasik Şerit Tespiti (OpenCV & IPM Perspektif Dönüşümü)
+Ters Perspektif Eşleme (**Inverse Perspective Mapping - IPM**) ile Kuş Bakışı (Bird's-Eye View) dönüşümü, dinamik HSV renk uzayı filtreleme ve histogram tepe noktası kayan pencere (sliding window) algoritması.
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="33%">
-        <b>1. ROI Selection & Warping</b><br/>
-        <img src="assets/opencv_roi.jpg" alt="ROI Selection" width="270"/>
+        <b>1. İlgilenilen Alan (ROI)</b><br/>
+        <img src="assets/opencv_roi.jpg" alt="ROI Seçimi" width="270"/>
       </td>
       <td align="center" width="33%">
-        <b>2. Bird's Eye View (IPM)</b><br/>
-        <img src="assets/opencv_birdseye.jpg" alt="Bird's Eye View" width="270"/>
+        <b>2. Kuş Bakışı Görünüm (IPM)</b><br/>
+        <img src="assets/opencv_birdseye.jpg" alt="Kuş Bakışı Dönüşüm" width="270"/>
       </td>
       <td align="center" width="33%">
-        <b>3. Sliding Window Tracking</b><br/>
-        <img src="assets/opencv_sliding_window.jpg" alt="Sliding Window Detection" width="270"/>
+        <b>3. Kayan Pencere Takibi</b><br/>
+        <img src="assets/opencv_sliding_window.jpg" alt="Kayan Pencere Algoritması" width="270"/>
       </td>
     </tr>
   </table>
-  <p><i>Figure 2: Perspective Transform pipeline: Trapezoidal ROI coordinates &rarr; IPM Warping &rarr; Polynomial centroid sliding windows.</i></p>
+  <p><i>Şekil 2: Perspektif dönüşüm hattı: Trapezoidal ROI koordinatları &rarr; IPM Kuş Bakışı &rarr; Kayan pencere merkez izleme.</i></p>
 </div>
 
 ---
 
-### 3️⃣ Deep Learning Lane Segmentation (YOLO11-Seg)
-Trained for **250 epochs** on custom lane marking datasets with spatial augmentations to deliver crisp lane boundaries in adverse weather and shadows.
+### 3️⃣ Derin Öğrenme Tabanlı Şerit Segmentasyonu (YOLO11-Seg)
+Özel şerit veri seti üzerinde **250 epoch** boyunca eğitilmiş, karmaşık ışıklandırma koşulları ve gölgelerde bile yüksek keskinlikte şerit çizgisi maskesi çıkaran model.
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="50%">
-        <b>Validation Batch Predictions</b><br/>
-        <img src="assets/lane_val_pred.jpg" alt="Lane Validation Predictions" width="420"/>
+        <b>Doğrulama (Validation) Toplu Tahminleri</b><br/>
+        <img src="assets/lane_val_pred.jpg" alt="Şerit Doğrulama Tahminleri" width="420"/>
       </td>
       <td align="center" width="50%">
-        <b>Video Inference Sample</b><br/>
-        <img src="assets/yolo_lane_segmentation_demo.jpg" alt="Lane Segmentation Live Demo" width="420"/>
+        <b>Video Üzerinde Canlı Çıkarım</b><br/>
+        <img src="assets/yolo_lane_segmentation_demo.jpg" alt="Canlı Şerit Segmentasyonu" width="420"/>
       </td>
     </tr>
   </table>
-  <p><i>Figure 3: YOLO11-seg lane segmentation validation batch (left) and live on-road video inference output (right).</i></p>
+  <p><i>Şekil 3: YOLO11-seg şerit segmentasyonu doğrulama çıktısı (sol) ve gerçek sürüş videosu çıkarım sonucu (sağ).</i></p>
 </div>
 
 ---
 
-### 4️⃣ Drivable Area & Road Surface Segmentation (YOLO11-Seg)
-Trained for **100 epochs** on comprehensive road surface datasets for drivable vs. non-drivable road surface segmentation.
+### 4️⃣ Sürülebilir Yol Alanı Segmentasyonu (YOLO11-Seg)
+Araçların güvenle hareket edebileceği yol yüzeyini arka plandan ve kaldırımlardan ayırt etmek için **100 epoch** eğitilmiş sürülebilir alan segmentasyon modeli.
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="50%">
-        <b>Drivable Road Surface Mask</b><br/>
-        <img src="assets/yolo_road_segmentation_demo.jpg" alt="Road Surface Segmentation" width="420"/>
+        <b>Sürülebilir Alan Maskesi</b><br/>
+        <img src="assets/yolo_road_segmentation_demo.jpg" alt="Yol Yüzeyi Segmentasyonu" width="420"/>
       </td>
       <td align="center" width="50%">
-        <b>Urban Scene Test Inference</b><br/>
-        <img src="assets/road_inference_people.jpg" alt="Urban Road Segmentation" width="420"/>
+        <b>Şehir İçi Ortam Testi</b><br/>
+        <img src="assets/road_inference_people.jpg" alt="Şehir İçi Yol Segmentasyonu" width="420"/>
       </td>
     </tr>
   </table>
-  <p><i>Figure 4: Real-time drivable area segmentation across highway driving and complex urban environments.</i></p>
+  <p><i>Şekil 4: Otoyol ve yoğun şehir içi sahnelerinde gerçek zamanlı sürülebilir yol yüzeyi segmentasyonu.</i></p>
 </div>
 
 ---
 
-## 📊 Model Training & Evaluation Metrics
+## 📊 Eğitim Başarımı ve Değerlendirme Grafikleri
 
-### 📈 Training Convergence & Performance Curves
+### 📈 Kayıp (Loss) ve Metrik İlerlemesi
 
 <div align="center">
   <table>
     <tr>
       <td align="center" width="50%">
-        <b>Lane Segmentation Training (250 Epochs)</b><br/>
-        <img src="assets/lane_training_results.png" alt="Lane Training Results" width="420"/>
+        <b>Şerit Segmentasyonu Eğitimi (250 Epoch)</b><br/>
+        <img src="assets/lane_training_results.png" alt="Şerit Eğitimi Sonuçları" width="420"/>
       </td>
       <td align="center" width="50%">
-        <b>Road Surface Training (100 Epochs)</b><br/>
-        <img src="assets/road_training_results.png" alt="Road Training Results" width="420"/>
+        <b>Yol Yüzeyi Eğitimi (100 Epoch)</b><br/>
+        <img src="assets/road_training_results.png" alt="Yol Yüzeyi Eğitimi Sonuçları" width="420"/>
       </td>
     </tr>
     <tr>
       <td align="center" width="50%">
-        <b>Lane Confusion Matrix</b><br/>
-        <img src="assets/lane_confusion_matrix.png" alt="Lane Confusion Matrix" width="320"/>
+        <b>Şerit Karmaşıklık Matrisi (Confusion Matrix)</b><br/>
+        <img src="assets/lane_confusion_matrix.png" alt="Şerit Karmaşıklık Matrisi" width="320"/>
       </td>
       <td align="center" width="50%">
-        <b>Road Confusion Matrix</b><br/>
-        <img src="assets/road_confusion_matrix.png" alt="Road Confusion Matrix" width="320"/>
+        <b>Yol Karmaşıklık Matrisi (Confusion Matrix)</b><br/>
+        <img src="assets/road_confusion_matrix.png" alt="Yol Karmaşıklık Matrisi" width="320"/>
       </td>
     </tr>
   </table>
@@ -131,125 +131,125 @@ Trained for **100 epochs** on comprehensive road surface datasets for drivable v
 
 ---
 
-## 📁 Repository Structure
+## 📁 Proje Dizin Yapısı
 
 ```text
 Self-Driving-Cars-Demo/
 ├── 📂 Car&Person Detection/
-│   ├── 📜 detect.py                   # YOLO11 real-time detection & video recorder script
-│   ├── 📜 coco_classes.txt            # COCO dataset class index definitions
+│   ├── 📜 detect.py                   # YOLO11 gerçek zamanlı tespit & video kaydetme betiği
+│   ├── 📜 coco_classes.txt            # COCO veri seti sınıf listesi tanımları
 │   ├── 📂 models/
-│   │   └── 📦 yolo11l.pt              # Pretrained YOLO11 Large weights (Git LFS)
-│   ├── 📂 inference/                  # Test input video recordings
-│   └── 📂 results/                    # Processed output video with detections & FPS
+│   │   └── 📦 yolo11l.pt              # Önceden eğitilmiş YOLO11 Large ağırlıkları (Git LFS)
+│   ├── 📂 inference/                  # Test sürüşü giriş videoları
+│   └── 📂 results/                    # İşlenmiş ve FPS bilgisi eklenmiş sonuç videosu
 │
 ├── 📂 Lane Detection with OpenCV/
-│   ├── 📜 detect_lane.py              # Bird's-eye view IPM & sliding window lane tracker
-│   ├── 📜 roi_selector.py             # Interactive Region-of-Interest coordinate calibration
-│   ├── 🖼️ coordinates.png             # Visual guide for IPM perspective points
-│   └── 📂 test_videos/                # Benchmark dashcam road videos
+│   ├── 📜 detect_lane.py              # Kuş bakışı IPM ve kayan pencere şerit izleme algoritması
+│   ├── 📜 roi_selector.py             # İnteraktif ROI koordinat kalibrasyon aracı
+│   ├── 🖼️ coordinates.png             # IPM perspektif noktaları görsel kılavuzu
+│   └── 📂 test_videos/                # Test sürüş dashcam videoları
 │
 ├── 📂 Lane Detection with YOLO/
-│   ├── 📓 Lane segmentation.ipynb     # Complete training, validation, and inference pipeline
+│   ├── 📓 Lane segmentation.ipynb     # Uçtan uca eğitim, doğrulama ve çıkarım jupyter defteri
 │   ├── 📂 data/
-│   │   ├── 📜 config.yaml             # Dataset YAML paths and class definitions
-│   │   └── 📦 dataset.zip             # Annotated lane segmentation dataset (Git LFS)
-│   └── 📂 runs/segment/               # Checkpoints, validation batches, and metrics
+│   │   ├── 📜 config.yaml             # Veri seti yolları ve sınıf tanımları
+│   │   └── 📦 dataset.zip             # Etiketli şerit segmentasyon veri seti (Git LFS)
+│   └── 📂 runs/segment/               # Kontrol noktaları, ağırlıklar (best.pt) ve metrikler
 │
 ├── 📂 Roading Segmentation (Driveable Area)/
-│   ├── 📓 Road Segmentation.ipynb     # Road segmentation model training & inference notebook
+│   ├── 📓 Road Segmentation.ipynb     # Sürülebilir alan segmentasyon modeli eğitim defteri
 │   ├── 📂 data/
-│   │   ├── 📜 data.yaml               # Road surface dataset configuration
-│   │   └── 📦 road_surface_dataset.zip# High-resolution road surface dataset (Git LFS)
-│   └── 📂 runs/segment/               # Training logs, weights/best.pt, and predict outputs
+│   │   ├── 📜 data.yaml               # Yol yüzeyi veri seti yapılandırması
+│   │   └── 📦 road_surface_dataset.zip# Yüksek çözünürlüklü yol veri seti (Git LFS)
+│   └── 📂 runs/segment/               # Eğitim logları, best.pt ağırlıkları ve tahmin çıktıları
 │
-├── 📂 assets/                         # Documentation images, graphs, and preview frames
-├── 📜 .gitattributes                  # Git LFS rules for large model weights and videos
-├── 📜 .gitignore                      # Python/Jupyter clean ignore configuration
-├── 📜 requirements.txt                # Python package dependencies
-└── 📜 README.md                       # Main documentation
+├── 📂 assets/                         # Dokümantasyon görselleri, grafikler ve test kareleri
+├── 📜 .gitattributes                  # Büyük model ağırlıkları ve videolar için Git LFS kuralları
+├── 📜 .gitignore                      # Python/Jupyter temizleme yapılandırması
+├── 📜 requirements.txt                # Gerekli Python kütüphaneleri
+└── 📜 README.md                       # Ana dokümantasyon dosyası
 ```
 
 ---
 
-## 🚀 Getting Started & Installation
+## 🚀 Kurulum ve Başlangıç
 
-### 1. Clone the Repository (with Git LFS)
-Make sure [Git LFS](https://git-lfs.com/) is installed on your system before cloning:
+### 1. Depoyu Klonlama (Git LFS ile)
+Depoyu indirmeden önce sisteminizde [Git LFS](https://git-lfs.com/)'nin kurulu olduğundan emin olun:
 
 ```bash
-# Install Git LFS (if not already installed)
+# Git LFS eklentisini aktifleştirin
 git lfs install
 
-# Clone the repository
+# Depoyu klonlayın
 git clone https://github.com/faatihucar/Self-Driving-Cars-Demo.git
 cd Self-Driving-Cars-Demo
 
-# Pull large binaries & model weights
+# Büyük model ağırlıklarını ve videoları çekin
 git lfs pull
 ```
 
-### 2. Set Up Virtual Environment & Dependencies
+### 2. Sanal Ortam Oluşturma ve Bağımlılıkları Yükleme
 ```bash
-# Create a virtual environment
+# Sanal ortam oluşturun
 python -m venv venv
 
-# Activate the virtual environment
+# Sanal ortamı aktifleştirin
 # Windows:
 venv\Scripts\activate
 # Linux / macOS:
 source venv/bin/activate
 
-# Install required packages
+# Gerekli paketleri yükleyin
 pip install -r requirements.txt
 ```
 
 ---
 
-## 💻 Usage & Running the Modules
+## 💻 Modüllerin Kullanımı ve Çalıştırma
 
-### 🚗 Run Car & Pedestrian Detection
+### 🚗 1. Araç ve Yaya Tespitini Başlatma
 ```bash
 cd "Car&Person Detection"
 python detect.py
 ```
-> Press `q` to terminate live preview. The annotated video with live FPS counters will be automatically exported to `results/test_vid_res.avi`.
+> Canlı önizlemeyi kapatmak için `q` tuşuna basabilirsiniz. İşlenen video otomatik olarak `results/test_vid_res.avi` konumuna kaydedilecektir.
 
-### 🛣️ Run OpenCV Classical Lane Detection
+### 🛣️ 2. OpenCV Klasik Şerit Tespitini Başlatma
 ```bash
 cd "Lane Detection with OpenCV"
 python detect_lane.py
 ```
-> Adjust the interactive HSV trackbars (`L-H`, `L-S`, `L-V`, `U-H`, `U-S`, `U-V`) to fine-tune color thresholding under varying road surfaces. Press `ESC` to exit.
+> Açılan penceredeki etkileşimli HSV ayar çubuklarını (`L-H`, `L-S`, `L-V`, `U-H`, `U-S`, `U-V`) kullanarak farklı asfalt ve ışık tonlarına göre renk filtrelemesini anlık ayarlayabilirsiniz. Çıkmak için `ESC` tuşuna basın.
 
-### 🧠 Run YOLO Lane or Road Segmentation
-You can run inference directly using the trained PyTorch weights:
+### 🧠 3. YOLO Şerit veya Yol Segmentasyonu Çıkarımı
+Eğitilmiş PyTorch modelleri ile doğrudan komut satırından çıkarım yapabilirsiniz:
 
 ```bash
-# Lane Segmentation Inference
+# Şerit Segmentasyonu Çıkarımı
 yolo segment predict model="Lane Detection with YOLO/runs/segment/yolov11_lane_segmentation/weights/best.pt" source="Lane Detection with OpenCV/test_videos/road.mp4" show_labels=False show_boxes=False
 
-# Drivable Area Segmentation Inference
+# Sürülebilir Yol Alanı Segmentasyonu Çıkarımı
 yolo segment predict model="Roading Segmentation (Driveable Area)/runs/segment/yolov11_road_segmentation2/weights/best.pt" source="Roading Segmentation (Driveable Area)/inference/road.mp4" show_labels=False show_boxes=False
 ```
 
-Or open and execute the Jupyter Notebooks:
+Veya Jupyter Notebook dosyalarını açarak eğitim/çıkarım adımlarını adım adım çalıştırabilirsiniz:
 - `Lane Detection with YOLO/Lane segmentation.ipynb`
 - `Roading Segmentation (Driveable Area)/Road Segmentation.ipynb`
 
 ---
 
-## 🛠️ Tech Stack & Libraries
+## 🛠️ Kullanılan Teknolojiler ve Kütüphaneler
 
-- **Deep Learning Frameworks**: [Ultralytics YOLO11](https://github.com/ultralytics/ultralytics), [PyTorch](https://pytorch.org/), Torchvision
-- **Computer Vision**: [OpenCV (cv2)](https://opencv.org/), NumPy, Imutils
-- **Data Visualization**: Matplotlib, Seaborn, Pandas
-- **Storage & Version Control**: Git Large File Storage (LFS)
+- **Derin Öğrenme:** [Ultralytics YOLO11](https://github.com/ultralytics/ultralytics), [PyTorch](https://pytorch.org/), Torchvision
+- **Bilgisayarlı Görü:** [OpenCV (cv2)](https://opencv.org/), NumPy, Imutils
+- **Veri Görselleştirme:** Matplotlib, Seaborn, Pandas
+- **Sürüm Kontrolü & Depolama:** Git Large File Storage (Git LFS)
 
 ---
 
-## 👨‍💻 Author & Contact
+## 👨‍💻 Geliştirici & İletişim
 
-Developed by **[Fatih Uçar](https://github.com/faatihucar)**
+Geliştirici: **[Fatih Uçar](https://github.com/faatihucar)**
 
-Feel free to open issues or contribute pull requests to enhance the self-driving perception algorithms!
+Otonom sürüş algoritmalarıyla ilgili soru sormak, katkıda bulunmak veya hata bildirmek için issues veya pull request açabilirsiniz!
