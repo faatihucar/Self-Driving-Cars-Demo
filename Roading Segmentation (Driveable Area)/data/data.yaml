@@ -1,0 +1,8 @@
+path: /content/drive/MyDrive/YOLOv11 projects/Self Driving Car/Road Segmentation (Driveable Area Segmentation)/data
+
+train: ./train/images
+val: ./valid/images
+test: ./test/images
+
+nc: 1
+names: ['road']
